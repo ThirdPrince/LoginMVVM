@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId "com.dhl.loginmvvm"
         minSdk 21
-        targetSdk 33
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -57,4 +57,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+
+    implementation 'io.github.knight-zxw:blockcanary:0.0.5'
+    //引入卡顿消息通知及相关展示UI
+    implementation 'io.github.knight-zxw:blockcanary-ui:0.0.5'
+
 }

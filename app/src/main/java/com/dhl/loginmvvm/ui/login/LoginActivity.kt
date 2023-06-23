@@ -1,5 +1,6 @@
 package com.dhl.loginmvvm.ui.login
 
+import android.app.Activity
 import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -66,11 +67,11 @@ class LoginActivity : AppCompatActivity() {
 
 
             if (it.error != null) {
-
+                showToast(it.error)
             }
             if (it.success != null) {
+                showToast(it.success.displayName)
                 goMain()
-               // updateUiWithUser(it.success)
             }
 
         })
@@ -78,20 +79,6 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-
-    private fun updateUiWithUser(model: UserInfo) {
-        val welcome = getString(R.string.welcome)
-        val displayName = model.displayName
-        Toast.makeText(
-            applicationContext,
-            "$welcome $displayName",
-            Toast.LENGTH_LONG
-        ).show()
-    }
-
-    private fun showLoginFailed(@StringRes errorString: Int) {
-        Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
-    }
 
     private fun showLoginDialog() {
         dialog.show()
@@ -106,10 +93,14 @@ class LoginActivity : AppCompatActivity() {
     /**
      * goMain
      */
-    private fun goMain(){
-        val intent = Intent(this,MainActivity::class.java)
+    private fun goMain() {
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
+}
+
+fun Activity.showToast(str: String) {
+    Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
 }
 

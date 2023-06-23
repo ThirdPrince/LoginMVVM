@@ -8,7 +8,7 @@ import android.text.TextUtils
  *
  */
 data class LoginModel(
-    var email: String,
+    var userId: String,
     var password: String
 ){
     /**
@@ -16,6 +16,6 @@ data class LoginModel(
      * 不为空而且密码>= 6
      */
     fun isValid():Boolean{
-        return !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && password.length >=6
+        return !TextUtils.isEmpty(userId) && !TextUtils.isEmpty(password) && password.length >=6
     }
 }

@@ -1,6 +1,8 @@
 package com.dhl.loginmvvm.data
 
 import com.dhl.loginmvvm.data.model.LoginModel
+import com.dhl.loginmvvm.ui.login.LoginResult
+import com.dhl.loginmvvm.ui.login.UserInfo
 import kotlinx.coroutines.delay
 import java.io.IOException
 
@@ -9,18 +11,26 @@ import java.io.IOException
  */
 class LoginDataSource {
 
-   suspend fun login(username: String, password: String): Result<LoginModel> {
-        try {
-            // TODO: handle loggedInUser authentication
-                delay(100)
-            val fakeUser = LoginModel(java.util.UUID.randomUUID().toString(), "Jane Doe")
-            return Result.Success(fakeUser)
+    var count = 0
+    //模拟登录
+   suspend fun login(username: String, password: String): Result<LoginResult> {
+        return try {
+            count++
+            delay(100)
+            if(count %2 ==0){
+                val userInfo = UserInfo(username,"1233333",java.util.UUID.randomUUID().toString())
+                val fakeUser = LoginResult( userInfo,"")
+                Result.Success(fakeUser)
+            }else{
+                val fakeUser = LoginResult( null,"登录失败")
+                Result.Fail(fakeUser)
+            }
+
         } catch (e: Throwable) {
-            return Result.Error(IOException("Error logging in", e))
+            val fakeUser = LoginResult( null,"Error logging in")
+            Result.Fail(fakeUser)
         }
     }
 
-    fun logout() {
-        // TODO: revoke authentication
-    }
+
 }

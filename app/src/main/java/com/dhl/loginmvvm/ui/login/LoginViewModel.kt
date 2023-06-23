@@ -1,7 +1,6 @@
 package com.dhl.loginmvvm.ui.login
 
 import android.text.Editable
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -51,17 +50,13 @@ class LoginViewModel(val loginRepository: LoginRepository) : ViewModel() {
 
             delay(1000)
             if (result is Result.Success) {
-                _loginResult.value = LoginResult(
-                    success = UserInfo(
-                        displayName = result.data.email,
-                        userId = result.data.password
-                    )
-                )
+                _loginResult.value = result.data
                 _loginStateLiveData.value = LoginState(loginState = LoginState.LOGIN_SUCCESS)
-            } else {
-                _loginResult.value = LoginResult(error = R.string.login_failed)
+            } else if(result is Result.Fail){
+                _loginResult.value = result.data
                 _loginStateLiveData.value = LoginState(loginState = LoginState.LOGIN_FAIL)
             }
+
 
         }
 
@@ -69,7 +64,7 @@ class LoginViewModel(val loginRepository: LoginRepository) : ViewModel() {
 
 
     fun onUserTextChanged(text: Editable) {
-        loginRepository.user.email = text.toString()
+        loginRepository.user.userId = text.toString()
         loginIsValid()
     }
 
@@ -106,7 +101,7 @@ class LoginViewModel(val loginRepository: LoginRepository) : ViewModel() {
      */
     fun loginOnClick() {
         _loginStateLiveData.value = LoginState(loginState = LoginState.LOGIN_ING)
-        login(loginRepository.user.email, loginRepository.user.password)
+        login(loginRepository.user.userId, loginRepository.user.password)
     }
 
 

@@ -5,6 +5,6 @@ package com.dhl.loginmvvm.ui.login
  */
 data class LoginResult(
     val success: UserInfo? = null,
-    val error: Int? = null
+    val error: String?=null
 
 )

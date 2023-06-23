@@ -21,4 +21,6 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="block_canary_display_activity_label">Blocks</string>
+    <item name="block_canary_auto_install" type="bool">false</item>
 </resources>

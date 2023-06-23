@@ -1,6 +1,7 @@
 package com.dhl.loginmvvm.data
 
 import com.dhl.loginmvvm.data.model.LoginModel
+import com.dhl.loginmvvm.ui.login.LoginResult
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -9,24 +10,13 @@ import com.dhl.loginmvvm.data.model.LoginModel
 
 class LoginRepository(val dataSource: LoginDataSource) {
 
-    // in-memory cache of the loggedInUser object
     val user: LoginModel by lazy {
         LoginModel("","")
     }
 
 
-
-
-
-    suspend fun login(username: String, password: String): Result<LoginModel> {
-        // handle login
-        val result = dataSource.login(username, password)
-
-        if (result is Result.Success) {
-           // setLoggedInUser(result.data)
-        }
-
-        return result
+    suspend fun login(username: String, password: String): Result<LoginResult> {
+        return dataSource.login(username, password)
     }
 
 
