@@ -89,7 +89,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_marginTop="30dp"
-                        android:enabled="@{viewModel.loginState.loginState == LoginState.LOGIN_VALID }"
+                        android:enabled="@{viewModel.loginStateLivedata.loginState == LoginState.LOGIN_VALID }"
                         android:onClick="@{()->viewModel.loginOnClick()}"
                         android:text="Login"
                         android:textSize="18sp"

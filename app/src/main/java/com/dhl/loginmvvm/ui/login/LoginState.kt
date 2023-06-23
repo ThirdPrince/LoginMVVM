@@ -12,7 +12,7 @@ package com.dhl.loginmvvm.ui.login
 
  */
 data class LoginState(
-    val loginState: Int = NOT_LOGIN
+    var loginState: Int = NOT_LOGIN
 ){
     companion object{
 

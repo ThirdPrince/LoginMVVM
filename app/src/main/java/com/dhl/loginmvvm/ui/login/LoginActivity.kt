@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
         binding.viewModel = loginViewModel
 
 
-        loginViewModel.loginState.observe(this,{
+        loginViewModel.loginStateLivedata.observe(this,{
             when(it.loginState){
                LOGIN_ING ->{
                     showLoginDialog()
