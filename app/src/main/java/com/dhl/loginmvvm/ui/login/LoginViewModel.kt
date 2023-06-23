@@ -10,8 +10,10 @@ import com.dhl.loginmvvm.data.LoginRepository
 import com.dhl.loginmvvm.data.Result
 
 import com.dhl.loginmvvm.R
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * LoginViewModel
@@ -83,13 +85,19 @@ class LoginViewModel(val loginRepository: LoginRepository) : ViewModel() {
      *
      */
     fun loginIsValid() {
-        if (loginRepository.user.isValid()) {
-            loginState.loginState = LoginState.LOGIN_VALID
 
-        } else {
-            loginState.loginState = LoginState.NOT_LOGIN
+        viewModelScope.launch {
+            withContext(Dispatchers.Default){
+                if (loginRepository.user.isValid()) {
+                    loginState.loginState = LoginState.LOGIN_VALID
+                } else {
+                    loginState.loginState = LoginState.NOT_LOGIN
+                }
+                _loginStateLiveData.postValue(loginState)
+            }
+
         }
-        _loginStateLiveData.postValue(loginState)
+
     }
 
 

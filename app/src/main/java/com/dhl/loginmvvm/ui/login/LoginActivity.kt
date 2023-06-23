@@ -1,5 +1,6 @@
 package com.dhl.loginmvvm.ui.login
 
+import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -9,7 +10,8 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.dhl.loginmvvm.R
-import com.dhl.loginmvvm.databinding.Login2Binding
+import com.dhl.loginmvvm.databinding.ActivityLoginBinding
+import com.dhl.loginmvvm.main.MainActivity
 import com.dhl.loginmvvm.ui.login.LoginState.Companion.LOGIN_ING
 
 
@@ -21,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
 
-    val dialog: MaterialDialog by lazy {
+    private val dialog: MaterialDialog by lazy {
         MaterialDialog.Builder(this)
             .content("登录中...")
             .progress(true, 10)
@@ -31,14 +33,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = DataBindingUtil.setContentView<Login2Binding>(
+        val binding = DataBindingUtil.setContentView<ActivityLoginBinding>(
             this,
-            R.layout.login2
+            R.layout.activity_login
         )
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
@@ -46,12 +46,12 @@ class LoginActivity : AppCompatActivity() {
         binding.viewModel = loginViewModel
 
 
-        loginViewModel.loginStateLivedata.observe(this,{
-            when(it.loginState){
-               LOGIN_ING ->{
+        loginViewModel.loginStateLivedata.observe(this, {
+            when (it.loginState) {
+                LOGIN_ING -> {
                     showLoginDialog()
                 }
-                LoginState.LOGIN_FAIL, LoginState.LOGIN_SUCCESS->{
+                LoginState.LOGIN_FAIL, LoginState.LOGIN_SUCCESS -> {
                     disLoginDialog()
                 }
 
@@ -60,21 +60,18 @@ class LoginActivity : AppCompatActivity() {
             loginViewModel.loginIsValid()
 
 
-
-
         })
 
         loginViewModel.loginResult.observe(this@LoginActivity, Observer {
 
 
-            if(it.error != null){
+            if (it.error != null) {
 
             }
-            if(it.success != null){
-                updateUiWithUser(it.success)
+            if (it.success != null) {
+                goMain()
+               // updateUiWithUser(it.success)
             }
-            dialog.dismiss()
-
 
         })
 
@@ -96,13 +93,23 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
     }
 
-    private fun showLoginDialog(){
+    private fun showLoginDialog() {
         dialog.show()
 
     }
-    private fun disLoginDialog(){
+
+    private fun disLoginDialog() {
         dialog.dismiss()
 
+    }
+
+    /**
+     * goMain
+     */
+    private fun goMain(){
+        val intent = Intent(this,MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
 

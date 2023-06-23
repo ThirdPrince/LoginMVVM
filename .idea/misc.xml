@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable-xxhdpi/custom_edittext.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/custom_edittext.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/dialoglogin.xml" value="0.24320652173913043" />
         <entry key="app/src/main/res/layout/layout.xml" value="0.24320652173913043" />
         <entry key="app/src/main/res/layout/login2.xml" value="0.1" />

@@ -10,10 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginMVVM">
         <activity
+            android:name=".main.MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.LoginMVVM.NoActionBar" />
+        <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:label="@string/title_activity_login">
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
