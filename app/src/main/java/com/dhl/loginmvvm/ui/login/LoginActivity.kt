@@ -56,7 +56,6 @@ class LoginActivity : AppCompatActivity() {
                     disLoginDialog()
                 }
 
-
             }
             loginViewModel.loginIsValid()
 
@@ -70,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
                 showToast(it.error)
             }
             if (it.success != null) {
-                showToast(it.success.displayName)
+                showToast("user:${it.success.displayName}")
                 goMain()
             }
 
