@@ -10,6 +10,7 @@
             type="com.dhl.loginmvvm.ui.login.LoginViewModel" />
 
         <import type="android.view.View" />
+
         <import type="com.dhl.loginmvvm.ui.login.LoginState" />
     </data>
 
@@ -40,8 +41,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:orientation="vertical"
                     android:focusable="false"
+                    android:orientation="vertical"
                     android:padding="24dp">
 
 

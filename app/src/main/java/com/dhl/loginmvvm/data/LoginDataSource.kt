@@ -22,13 +22,13 @@ class LoginDataSource {
                 val fakeUser = LoginResult( userInfo,"")
                 Result.Success(fakeUser)
             }else{
-                val fakeUser = LoginResult( null,"登录失败")
-                Result.Fail(fakeUser)
+                val result = LoginResult( null,"登录失败")
+                Result.Fail(result)
             }
 
         } catch (e: Throwable) {
-            val fakeUser = LoginResult( null,"Error logging in")
-            Result.Fail(fakeUser)
+            val result = LoginResult( null,"Error logging in")
+            Result.Fail(result)
         }
     }
 
