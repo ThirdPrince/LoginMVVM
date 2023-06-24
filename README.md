@@ -133,8 +133,8 @@ class LoginDataSource {
             delay(100)
             if(count %2 ==0){
                 val userInfo = UserInfo(username,"1233333",java.util.UUID.randomUUID().toString())
-                val fakeUser = LoginResult( userInfo,"")
-                Result.Success(fakeUser)
+                val result = LoginResult( userInfo,"")
+                Result.Success(result)
             }else{
                 val result = LoginResult( null,"登录失败")
                 Result.Fail(result)
