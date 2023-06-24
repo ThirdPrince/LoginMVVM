@@ -46,9 +46,7 @@ Kotlin 协程是Kotlin语言中的一种轻量级线程库，旨在简化异步�
 
 ##  实现MVVM架构
 登录界面效果如下面动图所示：
-
-
-![1687602866132-1.gif](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/aca882fd2fa447c48284a9a9ec295888~tplv-k3u1fbpfcp-watermark.image?)
+<img src="screenshots/1.gif?raw=true" height="480">
 
 ### 定义Model层，包括 LoginModel，LoginState，LoginDataSource，LoginRepository
 
@@ -488,5 +486,11 @@ https://github.com/ThirdPrince/LoginMVVM
 该代码实现了一个使用Jetpack MVVM架构的Android登录界面。它通过Jetpack架构组件（如Lifecycle、LiveData和ViewModel和Databinding）与Kotlin协程，以实现更高效的MVVM架构。
 
 
+## 作者
 
+该项目由 [ThirdPrince](https://github.com/ThirdPrince) 创建和维护。
+
+## 许可证
+
+该项目使用 MIT 许可证。请参阅 LICENSE 文件以获取更多详细信息。
 
