@@ -36,6 +36,8 @@ LiveData是一个具有生命周期感知能力的可观察数据存储类。它
 
 ViewModel是一个用于管理UI相关数据的类。它提供了一种方便的方式来避免数据丢失和内存泄漏，并确保在组件的生命周期发生变化时，数据可以自动保存和恢复。ViewModel通常与LiveData结合使用，以确保UI组件和数据存储之间的一致性。
 
+4.Data Binding（数据绑定）：Data Binding 允许将布局文件中的视图与应用程序的数据模型进行绑定，从而实现数据驱动的用户界面。通过 Data Binding，开发人员可以通过在布局文件中直接引用变量和表达式来减少手动的视图操作和数据更新。这样可以减少样板代码的数量，提高代码的可读性和维护性。Data Binding 还可以与 LiveData 和 ViewModel 紧密集成，使数据的更新和界面的刷新变得更加简单和一致。
+
 
 5.Kotlin协程
 
@@ -462,6 +464,17 @@ class LoginViewModel(val loginRepository: LoginRepository) : ViewModel() {
 
 }
 ```
+这里账号和密码输入框验证是否Valid的过程中(loginIsValid),我使用LiveData的postValue方法而不是setValue方法。
+
+在 LiveData 中，postValue() 和 setValue() 是用于更新 LiveData 数据的两种方法。它们在本质上有以下区别：
+
+线程安全性：postValue() 方法是线程安全的，可以在任何线程中调用。它会将数据更新操作投递到主线程的消息队列中，在主线程空闲时进行实际的数据更新操作。而 setValue() 方法必须在主线程中调用，否则会抛出异常。
+
+数据更新时机：postValue() 方法会延迟执行数据更新操作，直到主线程空闲时才会进行实际的更新。这样可以避免在短时间内连续进行多次数据更新导致的频繁界面刷新。而 setValue() 方法会立即执行数据更新操作，并触发相应的观察者通知。
+
+多次更新合并：postValue() 方法可以处理多次数据更新，并将它们合并成一次更新。如果在多次 postValue() 调用之间存在较短的时间间隔，只会触发一次数据更新和观察者通知。而 setValue() 方法每次调用都会立即触发数据更新和通知。
+
+综上所述，postValue() 方法适合在后台线程中进行数据更新操作，可以避免线程安全问题，并合并多次更新以提高性能。而 setValue() 方法应在主线程中使用，用于需要立即更新数据并通知观察者的场景。
 
 
 
@@ -474,17 +487,6 @@ https://github.com/ThirdPrince/LoginMVVM
 ## 总结
 该代码实现了一个使用Jetpack MVVM架构的Android登录界面。它通过Jetpack架构组件（如Lifecycle、LiveData和ViewModel和Databinding）与Kotlin协程，以实现更高效的MVVM架构。
 
-这个登录Dmeo使用了以下7个类：
 
-1.  LoginModel：登录数据模型，包含userId和password字段，并提供了isValid()方法用于验证数据的合规性。
-2.  LoginState：登录状态类，包含登录的不同状态常量，如NOT_LOGIN、LOGIN_VALID、LOGIN_ING、LOGIN_SUCCESS和LOGIN_FAIL。
-3.  LoginResult：登录结果类，包含登录成功时的UserInfo对象和登录失败时的错误信息。
-4.  UserInfo：用户信息类，包含displayName、userId和token字段。
-5.  LoginDataSource：登录数据源类，模拟登录过程，通过模拟第一次失败、第二次成功来返回不同的结果。
-6.  LoginRepository：登录仓库类，作为ViewModel与数据源之间的桥梁，负责访问数据并返回结果。
-7.  LoginActivity：登录界面的Activity类，通过DataBinding将布局文件与ViewModel进行绑定，并处理登录按钮的点击事件和登录状态的变化。
-8.  LoginViewModel:这个ViewModel负责处理登录逻辑，并提供相关的LiveData供UI层观察和响应登录状态和结果的变化。
-
-其中1,2,3,4,5,6 都是属于Model层，7属于View层，8属于ViewModel。
 
 
